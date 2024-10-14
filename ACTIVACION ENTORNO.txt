@@ -1,0 +1,8 @@
+source .venv/Scripts/activate
+
+deactivate
+
+python manage.py runserver
+urls.py(django):
+http://127.0.0.1:8000/Viper/index
+ 
