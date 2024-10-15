@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .models import MiModelo
+from .models import Auto
 
-admin.site.register(MiModelo)
+admin.site.register(Auto)
