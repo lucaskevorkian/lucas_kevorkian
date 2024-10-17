@@ -6,6 +6,22 @@
 
 {% block main %}
 <form action="{% url 'buscar_auto' %}" method="GET">
-    <!-- Aquí irían tus campos de formulario -->
+    {{form}}
+    <input type="submit">
+
+
+
 </form>
+ 
+{% if autos %} 
+
+<ul>
+    {%for auto in autos %} 
+    <li> {{auto}} </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay autos registrados</p>
+{% endif %}
+
 {% endblock main %}

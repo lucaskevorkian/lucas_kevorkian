@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    Crear
+{% endblock  %}
+
+{% block h1 %}
+<h1 class="mx-auto my-0 text-uppercase">Crear Auto</h1>
+{% endblock  %}
+
+
+{% block main %}
+<form action="{% url 'crear_auto' %}" method="POST">
+    {% csrf_token %} 
+<!--     
+    <p>
+        Marca:
+    <input type="text" name="Marca" placeholder="marca"> 
+    </p>
+
+    <p>
+        Modelo:
+    <input type="text" name="Modelo"> 
+    </p>
+    
+    <p>
+        Año:
+    <input type="number" name="Año" placeholder="2000"> 
+    </p> 
+-->
+
+    {{form}}
+
+    <input type="submit" value="Enviar">
+    <button>Enviar</button>
+
+</form>
+{% endblock main %}
