@@ -60,6 +60,7 @@ def crear_auto(request):
             
             
         return render(request, "crear_auto.html", {"form": formulario})
+    return render(request, "crear_auto.html", {"form": formulario})
     
     
     
