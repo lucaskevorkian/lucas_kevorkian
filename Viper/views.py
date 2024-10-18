@@ -5,8 +5,8 @@ def index(request):
     return render(request, 'index.html')
 
 
-def motor(request):
-    return render(request, "motor.html")
+def sobre_mi(request):
+    return render(request, "sobre_mi.html")
 
 def precio(request):
     return render(request, "precio.html")
