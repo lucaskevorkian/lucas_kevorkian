@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    A
+{% endblock  %}
+
+{% block h1 %}
+<h1 class="mx-auto my-0 text-uppercase">{{ auto.marca }} {{ auto.modelo }}</h1>
+{% endblock  %}
+
+{% block main %}
+ 
+<ul>
+    <li>marca: {{auto.marca}}</li>
+    <li>modelo: {{auto.modelo}}</li>
+    <li>año: {{auto.año}}</li>
+
+</ul>
+
+
+{% endblock main %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Auto
-from .forms import crear_auto_formulario, buscar_auto_formulario
+from .forms import crear_auto_formulario, buscar_auto_formulario, config_basica
 def index(request):
     return render(request, 'index.html')
 
@@ -63,8 +63,33 @@ def crear_auto(request):
     return render(request, "crear_auto.html", {"form": formulario})
     
     
+def ver_auto(request, id):
+    auto = Auto.objects.get(id=id)
+    return render(request, "ver_auto.html", {"auto": auto})
     
     
+def borrar_auto(request, id):
+    auto = Auto.objects.get(id=id)
+    auto.delete()
+    return redirect("buscar_auto")
+
+  
+def editar_auto(request, id):
+    auto = Auto.objects.get(id=id)
+    
+    form = config_basica(initial={"Marca":auto.marca, "Modelo":auto.modelo, "Año":auto.año}) #sirve para get
+    
+    if request.method == "POST":
+        form = config_basica(request.POST)  #sirve para post
+        if form.is_valid():
+            auto.marca = form.cleaned_data.get("marca")
+            auto.modelo = form.cleaned_data.get("modelo")
+            auto.año = form.cleaned_data.get("año")
+             
+        auto.save
+            
+        return redirect("buscar_auto")
+    return render(request, "editar_auto.html", {"form": form, "auto": auto})
     
     
     # FUNCIONA TAMBIEN

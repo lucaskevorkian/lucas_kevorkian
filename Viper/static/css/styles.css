@@ -11201,3 +11201,14 @@ body {
 .footer {
   padding: 5rem 0;
 }
+.btn-eliminar {
+  background: none;
+  border: none;
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 2px;
+  line-height: 1;
+}
+<button type="submit" class="btn btn-danger" style="background:none; border:none; color:red; text-decoration: underline; cursor:pointer; font-size:12px; padding:2px; line-height:1;">Eliminar</button>

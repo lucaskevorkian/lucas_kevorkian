@@ -6,22 +6,33 @@
 
 {% block main %}
 <form action="{% url 'buscar_auto' %}" method="GET">
-    {{form}}
+    {{ form }}
     <input type="submit">
-
-
-
 </form>
- 
-{% if autos %} 
 
+{% if autos %}
 <ul>
-    {%for auto in autos %} 
-    <li> {{auto}} </li>
+    {% for auto in autos %}
+    <li>
+        {{ auto }} 
+        | <a href="{% url 'ver_auto' auto.id %}">Ver más</a>
+        | <a href="{% url 'editar_auto' auto.id %}">Editar</a>
+        <span style="text-decoration: none;">|</span>
+        <form action="{% url 'borrar_auto' auto.id %}" method="POST" style="display:inline;" onsubmit="return confirmarEliminacion();">
+            {% csrf_token %}
+            <button type="submit" class="btn-eliminar">Eliminar</button>
+        </form>
+    </li>
     {% endfor %}
 </ul>
 {% else %}
 <p>No hay autos registrados</p>
 {% endif %}
+
+<script>
+    function confirmarEliminacion() {
+        return confirm("¿Estás seguro de que deseas eliminar este auto?");
+    }
+</script>
 
 {% endblock main %}
