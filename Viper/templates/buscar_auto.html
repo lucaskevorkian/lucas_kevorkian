@@ -4,6 +4,16 @@
     Buscar
 {% endblock  %}
 
+
+{% block h1 %}
+    <h1 class="mx-auto my-0 text-uppercase">Autos</h1>
+    <h1></h1>
+    <a class="btn btn-primary" href="crear_auto">Crear auto</a>
+{% endblock  %}
+
+
+
+
 {% block main %}
 <form action="{% url 'buscar_auto' %}" method="GET">
     {{ form }}
