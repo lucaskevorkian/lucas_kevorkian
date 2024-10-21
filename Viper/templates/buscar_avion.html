@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    Buscar Aviones
+{% endblock  %}
+
+{% block h1 %}
+                        <h1 class="mx-auto my-0 text-uppercase">Aviones</h1>
+                        <h1></h1>
+                        <a class="btn btn-primary" href="crear/">Crear avion</a>
+                        {% endblock  %}
+
+
+{% block main %}
+ 
+
+
+
+{% if aviones %}
+<ul>
+    {% for avion in aviones %}
+    <li>
+        {{ avion }} 
+        | <a href="{% url 'ver_avion' avion.id %}">Ver más</a>
+        | <a href="{% url 'editar_avion' avion.id %}">Editar</a>
+        <span style="text-decoration: none;">|</span>
+        <form action="{% url 'borrar_avion' avion.id %}" method="POST" style="display:inline;" onsubmit="return confirmarEliminacion();">
+            {% csrf_token %}
+            <button type="submit" class="btn-eliminar">Eliminar</button>
+        </form>
+
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay aviones registrados</p>
+{% endif %}
+
+<script>
+    function confirmarEliminacion() {
+        return confirm("¿Estás seguro de que deseas eliminar este avion?");
+    }
+</script>
+
+{% endblock main %}
+
+
+
+
+
+        
+        

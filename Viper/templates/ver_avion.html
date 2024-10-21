@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    Ver avion
+{% endblock  %}
+
+{% block h1 %}
+<h1 class="mx-auto my-0 text-uppercase">{{ avion.modelo }} {{ avion.año }}</h1>
+{% endblock  %}
+
+{% block main %}
+ 
+<ul>
+    <li>Modelo: {{avion.modelo}}</li>
+    <li>Año: {{avion.año}}</li>
+    <li>Altitud: {{avion.altitud}}</li>
+
+</ul>
+
+
+{% endblock main %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    Editar Avion
+{% endblock  %}
+
+{% block h1 %}
+<h1 class="mx-auto my-0 text-uppercase">Editar Avion</h1>
+{% endblock  %}
+
+
+{% block main %}
+<form action="{% url 'editar_avion' avion.id %}" method="POST">
+    {% csrf_token %} 
+    {{form}}
+
+    <input type="submit" value="Enviar">
+    <button>Editar</button>
+
+</form>
+{% endblock main %}

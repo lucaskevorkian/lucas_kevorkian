@@ -1,6 +1,13 @@
 from django.shortcuts import render, redirect
-from .models import Auto
+from .models import Auto, Avion
 from .forms import crear_auto_formulario, buscar_auto_formulario, config_basica
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+
+from django.urls import reverse_lazy
+
+
 def index(request):
     return render(request, 'index.html')
 
@@ -106,7 +113,34 @@ def editar_auto(request, id):
     # else:
     #     return render(request, "crear_auto.html", {"error": "Faltan datos en el formulario"})
 
+class crear_avion(CreateView):
+    model = Avion
+    template_name = "crear_avion.html"
+    success_url = reverse_lazy("buscar_avion")
+    fields = ["modelo", "año", "altitud"]
 
+class buscar_avion(ListView):
+    model = Avion
+    template_name = "buscar_avion.html"
+    context_object_name = "aviones"
+    
+class ver_avion(DetailView):
+    model = Avion
+    template_name='ver_avion.html'
+    
+class editar_avion(UpdateView): 
+    model = Avion
+    template_name='editar_avion.html'
+    success_url = reverse_lazy("buscar_avion")
+    fields = ["modelo", "año", "altitud"]
+    
 
-        
-        
+def borrar_avion(request, id):
+    avion = Avion.objects.get(id=id)
+    avion.delete()
+    return redirect("buscar_avion")
+
+# class borrar_avion(DeleteView): 
+#     model = Avion
+#     template_name='borrar_avion.html' 
+#     success_url = reverse_lazy("buscar_avion")

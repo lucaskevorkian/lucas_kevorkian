@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    Crear Avion
+{% endblock  %}
+
+{% block h1 %}
+<h1 class="mx-auto my-0 text-uppercase">Crear Avion</h1>
+{% endblock  %}
+
+
+{% block main %}
+<form action="{% url 'crear_avion' %}" method="POST">
+    {% csrf_token %} 
+ 
+    {{form}}
+
+    <input type="submit" value="Enviar">
+    <button>Enviar</button>
+
+</form>
+{% endblock main %}
