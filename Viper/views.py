@@ -4,8 +4,9 @@ from .forms import crear_auto_formulario, buscar_auto_formulario, config_basica
 from django.views.generic.edit import CreateView, UpdateView 
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def inicio(request):
@@ -39,7 +40,7 @@ def buscar_auto(request):
     return render(request, "buscar_auto.html", {"autos": autos, "form": formulario})
 
 
-
+@login_required
 def crear_auto(request):
     formulario = crear_auto_formulario()
     if request.method == "POST":
@@ -58,13 +59,15 @@ def ver_auto(request, id):
     auto = Auto.objects.get(id=id)
     return render(request, "ver_auto.html", {"auto": auto})
     
-    
+
+@login_required  
 def borrar_auto(request, id):
     auto = Auto.objects.get(id=id)
     auto.delete()
     return redirect("buscar_auto")
 
-  
+
+@login_required
 def editar_auto(request, id):
     auto = Auto.objects.get(id=id)
     form = config_basica(initial={"Marca":auto.marca, "Modelo":auto.modelo, "Año":auto.año, "Precio":auto.precio, "Hp":auto.hp}) #sirve para get
@@ -82,8 +85,9 @@ def editar_auto(request, id):
         return redirect("buscar_auto")
     return render(request, "editar_auto.html", {"form": form, "auto": auto})
      
-     
-class crear_avion(CreateView):
+
+
+class crear_avion(LoginRequiredMixin, CreateView):
     model = Avion
     template_name = "crear_avion.html"
     success_url = reverse_lazy("buscar_avion")
@@ -97,13 +101,17 @@ class buscar_avion(ListView):
 class ver_avion(DetailView):
     model = Avion
     template_name='ver_avion.html'
+
     
-class editar_avion(UpdateView): 
+
+class editar_avion(LoginRequiredMixin, UpdateView): 
     model = Avion
     template_name='editar_avion.html'
     success_url = reverse_lazy("buscar_avion")
     fields = ["modelo", "año", "altitud"]
-    
+
+
+@login_required  
 def borrar_avion(request, id):
     avion = Avion.objects.get(id=id)
     avion.delete()

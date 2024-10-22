@@ -22,4 +22,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Viper/', include('Viper.urls')),  # Incluye el urls.py de viper
+    path('usuarios/', include('usuarios.urls')), 
+
 ]

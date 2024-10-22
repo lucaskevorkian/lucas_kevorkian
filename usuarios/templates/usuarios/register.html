@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    Registrar nuevo usuario
+{% endblock  %}
+
+
+
+{% block h1 %}
+<h1 class="mx-auto my-0 text-uppercase">Registro</h1>
+{% endblock  %}
+
+
+{% block main %}
+ <form action={% url "usuarios:register" %} method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Registrarse">
+
+
+
+ </form>
+{% endblock main %}

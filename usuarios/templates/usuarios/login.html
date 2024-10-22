@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    Login
+{% endblock  %}
+
+
+
+{% block h1 %}
+<h1 class="mx-auto my-0 text-uppercase">Login</h1>
+{% endblock  %}
+
+
+{% block main %}
+ <form action={% url "usuarios:login" %} method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Iniciar secion">
+
+
+
+ </form>
+{% endblock main %}

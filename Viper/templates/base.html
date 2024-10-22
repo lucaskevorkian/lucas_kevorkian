@@ -31,10 +31,23 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav mx-auto">
                         
-                        <li class="nav-item"><a class="nav-link" href="buscar_auto">Buscar auto</a></li>
-                        <li class="nav-item"><a class="nav-link" href="sobre_mi">Sobre mi</a></li>
-                        <li class="nav-item"><a class="nav-link" href="inicio">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="avion/">Buscar avion</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "buscar_auto" %}>Buscar auto</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "sobre_mi" %}>Sobre mi</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "inicio" %}>Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "buscar_avion" %}>Buscar avion</a></li>
+
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="#{{user.username}}">{{request.user.username}}</a></li>
+                        <form action={% url "usuarios:logout" %} method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="nav-link button-link" value="Cerrar sesion">
+                        </form>
+
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href={% url "usuarios:register" %} >Resgistrarse</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "usuarios:login" %} >Iniciar sesion</a></li>
+
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -47,8 +60,8 @@
                     <div class="text-center">
                         {% block h1 %}
                         <h1 class="mx-auto my-0 text-uppercase">Autos - Aviones</h1>
-                        <a class="btn btn-primary" href="crear_auto">Crear auto</a>
-                        <a class="btn btn-primary ms-5" href="avion/crear/">Crear avion</a> 
+                        <a class="btn btn-primary" href={% url "crear_auto" %}>Crear auto</a>
+                        <a class="btn btn-primary ms-5" href={% url "crear_avion" %}>Crear avion</a> 
                         {% endblock  %}
                     </div>
                 </div>
