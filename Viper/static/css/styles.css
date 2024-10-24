@@ -11222,10 +11222,18 @@ body {
   padding: 2px;
   line-height: 1;
 }
+
 <button type="submit" class="btn btn-danger" style="background:none; border:none; color:red; text-decoration: underline; cursor:pointer; font-size:12px; padding:2px; line-height:1;">Eliminar</button>
 
 .nav-item .btn {
   margin: 0; /* Elimina cualquier margen adicional */
   padding: 5px 10px; /* Ajusta el padding según sea necesario */
   display: inline-block; /* Asegúrate de que el botón esté en línea */
+}
+
+.avatar-circle {
+  width: 50px; /* Ancho de la imagen */
+  height: 50px; /* Alto de la imagen */
+  border-radius: 50%; /* Esto crea el efecto de círculo */
+  object-fit: cover; /* Asegura que la imagen se ajuste bien dentro del círculo */
 }

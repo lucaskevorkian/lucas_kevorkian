@@ -37,7 +37,12 @@
                         <li class="nav-item"><a class="nav-link" href={% url "buscar_avion" %}>Buscar avion</a></li>
 
                         {% if request.user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="#{{user.username}}">{{request.user.username}}</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "usuarios:editar_perfil" %}>
+                            <img src={{request.user.datosextra.avatar.url}} alt="" class="avatar-circle" height="50px">
+                            {{request.user.username}}
+
+
+                        </a></li>
                         <form action={% url "usuarios:logout" %} method="post">
                             {% csrf_token %}
                             <input type="submit" class="nav-link button-link" value="Cerrar sesion">
