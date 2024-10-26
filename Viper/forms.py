@@ -45,4 +45,14 @@ class editar_auto_form(forms.ModelForm):
 class AvionForm(forms.ModelForm):
     class Meta:
         model = Avion
-        fields = ['modelo', 'año', 'altitud', 'foto']
+        fields = ['modelo', 'año', 'altitud', 'foto', 'foto_url']
+        
+    def clean(self):
+        cleaned_data = super().clean()
+        foto = cleaned_data.get("foto")
+        foto_url = cleaned_data.get("foto_url")
+
+        # Validación: solo uno de los dos puede estar presente
+        if foto and foto_url:
+            raise forms.ValidationError("Solo se puede subir una imagen: ya sea una foto o una URL, no ambas.")     
+        return cleaned_data

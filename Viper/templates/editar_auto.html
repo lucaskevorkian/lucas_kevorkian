@@ -17,17 +17,16 @@
     {% if auto.foto %}
     <div>
         <label>Imagen actual:</label><br>
-        <img src="{{ auto.foto.url }}" alt="Imagen del auto" style="max-width: 200px; max-height: 200px;">
+        <img src="{{ auto.foto.url }}" alt="Imagen del auto" height="200px">
     </div>
 {% elif auto.foto_url %}
     <div>
         <label>Imagen actual desde URL:</label><br>
-        <img src="{{ auto.foto_url }}" alt="Imagen del auto" style="max-width: 200px; max-height: 200px;">
+        <img src="{{ auto.foto_url }}" alt="Imagen del auto" height="200px">
     </div>
 {% else %}
      
 {% endif %}
-
-<input type="submit" value="Enviar"> 
+<input type="submit" value="Guardar cambios">
 </form>
 {% endblock main %}

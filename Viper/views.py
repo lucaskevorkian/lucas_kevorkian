@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Auto, Avion
-from .forms import crear_auto_formulario, buscar_auto_formulario, config_basica, editar_auto_form
+from .forms import crear_auto_formulario, buscar_auto_formulario, config_basica, editar_auto_form, AvionForm
 from django.views.generic.edit import CreateView, UpdateView 
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -129,9 +129,9 @@ class ver_avion(DetailView):
 
 class editar_avion(LoginRequiredMixin, UpdateView): 
     model = Avion
+    form_class = AvionForm
     template_name='editar_avion.html'
-    success_url = reverse_lazy("buscar_avion")
-    fields = ["modelo", "año", "altitud", "foto"]
+    success_url = reverse_lazy("buscar_avion") 
 
 
 @login_required  

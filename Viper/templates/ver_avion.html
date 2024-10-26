@@ -11,11 +11,18 @@
 {% block main %}
  
 <ul>
-    <li>Modelo: {{avion.modelo}}</li>
-    <li>Año: {{avion.año}}</li>
-    <li>Altitud: {{avion.altitud}}</li>
-
+    <li>Modelo: {{ avion.modelo }}</li>
+    <li>Año: {{ avion.año }}</li>
+    <li>Altitud: {{ avion.altitud }}</li>
+    <li>Foto: 
+        {% if avion.foto %}
+            <img src="{{ avion.foto.url }}" alt="Imagen del avión" height="200px">
+        {% elif avion.foto_url %}
+            <img src="{{ avion.foto_url }}" alt="Imagen del avión" height="200px">
+        {% else %}
+            <p>Todavía no hay fotos</p>
+        {% endif %}
+    </li>
 </ul>
-
-
+ 
 {% endblock main %}

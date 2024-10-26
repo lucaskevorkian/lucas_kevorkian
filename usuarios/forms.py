@@ -16,7 +16,7 @@ class formulario_creacion_usuario(UserCreationForm): #cambios a lo q viene de fa
         
         
 class formulario_edicion_perfil(UserChangeForm):
-    email = forms.EmailField(label="Email")
+    email = forms.EmailField(label="Email", required=False)
     first_name = forms.CharField(label="Nombre", required=False)
     last_name = forms.CharField(label="Apellido", required=False)
     fecha_nacimiento = forms.DateField(required=False)

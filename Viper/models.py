@@ -21,6 +21,7 @@ class Avion(models.Model):
     año = models.IntegerField()
     altitud = models.IntegerField()
     foto = models.ImageField(upload_to="aviones", blank=True, null=True)
+    foto_url = models.URLField(blank=True, null=True)
     
     
     def __str__(self):

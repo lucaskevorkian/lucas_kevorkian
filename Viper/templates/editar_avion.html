@@ -13,10 +13,16 @@
 <form action="{% url 'editar_avion' avion.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %} 
     {{form}}
+
     {% if avion.foto %}
     <div>
         <label>Imagen actual:</label><br>
         <img src="{{ avion.foto.url }}" alt="Imagen del avión" style="max-width: 200px; max-height: 200px;">
+    </div>
+    {% elif avion.foto_url %}
+    <div>
+        <label>Imagen actual desde URL:</label><br>
+        <img src="{{ avion.foto_url }}" alt="Imagen del avion" height="200px">
     </div>
 {% endif %}
 
