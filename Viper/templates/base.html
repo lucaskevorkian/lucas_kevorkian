@@ -38,7 +38,12 @@
 
                         {% if request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href={% url "usuarios:editar_perfil" %}>
-                            <img src={{request.user.datosextra.avatar.url}} alt="" class="avatar-circle" height="50px">
+                            {% if request.user.datosextra.avatar %}
+                                <img src="{{ request.user.datosextra.avatar.url }}" alt="" class="avatar-circle" height="50px">
+                            {% else %}
+                                <img src="{% static 'assets/img/default_avatar.jpg' %}" alt="" class="avatar-circle" height="50px">
+                            {% endif %}
+
                             {{request.user.username}}
 
 

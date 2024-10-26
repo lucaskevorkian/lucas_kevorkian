@@ -10,12 +10,16 @@
 
 
 {% block main %}
-<form action="{% url 'editar_avion' avion.id %}" method="POST">
+<form action="{% url 'editar_avion' avion.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %} 
     {{form}}
+    {% if avion.foto %}
+    <div>
+        <label>Imagen actual:</label><br>
+        <img src="{{ avion.foto.url }}" alt="Imagen del avión" style="max-width: 200px; max-height: 200px;">
+    </div>
+{% endif %}
 
-    <input type="submit" value="Enviar">
-    <button>Editar</button>
-
+<input type="submit" value="Guardar cambios">
 </form>
-{% endblock main %}
+{% endblock %}

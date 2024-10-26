@@ -11,12 +11,21 @@
 {% block main %}
  
 <ul>
-    <li>Marca: {{auto.marca}}</li>
-    <li>Modelo: {{auto.modelo}}</li>
-    <li>Año: {{auto.año}}</li>
-    <li>Precio: {{auto.precio}}</li>
-    <li>Hp: {{auto.hp}}</li>
+    <li>Marca: {{ auto.marca }}</li>
+    <li>Modelo: {{ auto.modelo }}</li>
+    <li>Año: {{ auto.año }}</li>
+    <li>Precio: {{ auto.precio }}</li>
+    <li>Hp: {{ auto.hp }}</li>
+    <li>Foto: 
+        {% if auto.foto %}
+            <img src="{{ auto.foto.url }}" alt="Imagen del auto" height="200px">
+        {% elif auto.foto_url %}
+            <img src="{{ auto.foto_url }}" alt="Imagen del auto" height="200px">
+        {% else %}
+            <p>Todavía no hay fotos</p>
+        {% endif %}
+    </li>
 </ul>
-
+ 
 
 {% endblock main %}

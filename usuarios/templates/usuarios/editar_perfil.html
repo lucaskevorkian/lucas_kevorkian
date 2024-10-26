@@ -15,7 +15,7 @@
  <form action={% url "usuarios:editar_perfil" %} method="post" enctype="multipart/form-data">  
    {% csrf_token %}
     {{form}}
-    <input type="submit" value="Editar">
+    <input type="submit" value="Confirmar cambios">
 </form>
 
 <a href={% url "usuarios:cambiar_password" %}>Cambiar contraseña</a>

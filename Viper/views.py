@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Auto, Avion
-from .forms import crear_auto_formulario, buscar_auto_formulario, config_basica
+from .forms import crear_auto_formulario, buscar_auto_formulario, config_basica, editar_auto_form
 from django.views.generic.edit import CreateView, UpdateView 
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -66,24 +66,47 @@ def borrar_auto(request, id):
     auto.delete()
     return redirect("buscar_auto")
 
-
-@login_required
 def editar_auto(request, id):
-    auto = Auto.objects.get(id=id)
-    form = config_basica(initial={"Marca":auto.marca, "Modelo":auto.modelo, "Año":auto.año, "Precio":auto.precio, "Hp":auto.hp}) #sirve para get
+    auto = get_object_or_404(Auto, id=id)  # Pasa el modelo Auto como primer argumento
     
+    # Usa el formulario correcto; parece que config_basica no es el formulario que deseas.
+    formulario = editar_auto_form(instance=auto)  # Si editar_auto_form es tu formulario correcto para esta vista
+
     if request.method == "POST":
-        form = config_basica(request.POST)  #sirve para post
-        if form.is_valid():
-            auto.marca = form.cleaned_data.get("marca")
-            auto.modelo = form.cleaned_data.get("modelo")
-            auto.año = form.cleaned_data.get("año")
-            auto.precio = form.cleaned_data.get("Precio")
-            auto.hp= form.cleaned_data.get("Hp") 
-        auto.save
+        formulario = editar_auto_form(request.POST, request.FILES, instance=auto)  # Pasa 'auto' como instancia
+        if formulario.is_valid():
+            auto.foto = formulario.cleaned_data.get('foto') or auto.foto  # Mantiene la foto existente si no se sube una nueva
+            auto.foto_url = formulario.cleaned_data.get('foto_url') or auto.foto_url  # Mantiene la URL existente si no se proporciona una nueva
+            auto.save()
+            formulario.save()  # Guarda el formulario, lo que guarda también el modelo Auto
+            return redirect("buscar_auto")  # Redirige a la vista deseada
+
+    return render(request, "editar_auto.html", {"form": formulario, "auto": auto})
+
+
+# def editar_auto(request, id):
+#     auto = Auto.objects.get(id=id) # + request.user.Auto
+#     form = config_basica(instance=request.user, initial={"Marca":auto.marca, "Modelo":auto.modelo, "Año":auto.año, "Precio":auto.precio, "Hp":auto.hp, "foto": auto.foto}) #sirve para get
+    
+#     if request.method == "POST":
+#         form = config_basica(request.POST, request.FILES, instance=request.user)  #sirve para post
+#         if form.is_valid():
             
-        return redirect("buscar_auto")
-    return render(request, "editar_auto.html", {"form": form, "auto": auto})
+#             new_foto = form.cleaned_data.get("foto")
+            
+#             auto.marca = form.cleaned_data.get("marca")
+#             auto.modelo = form.cleaned_data.get("modelo")
+#             auto.año = form.cleaned_data.get("año")
+#             auto.precio = form.cleaned_data.get("Precio")
+#             auto.hp= form.cleaned_data.get("Hp") 
+            
+#             auto.foto = new_foto if new_foto else auto.foto
+            
+#         form.save()    
+#         auto.save
+            
+#         return redirect("buscar_auto")
+#     return render(request, "editar_auto.html", {"form": form, "auto": auto})
      
 
 
@@ -108,7 +131,7 @@ class editar_avion(LoginRequiredMixin, UpdateView):
     model = Avion
     template_name='editar_avion.html'
     success_url = reverse_lazy("buscar_avion")
-    fields = ["modelo", "año", "altitud"]
+    fields = ["modelo", "año", "altitud", "foto"]
 
 
 @login_required  

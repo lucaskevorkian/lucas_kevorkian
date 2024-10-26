@@ -48,15 +48,17 @@ def register(request):
 @login_required
 def editar_perfil(request):
     datos_extra = request.user.datosextra
-    formulario = formulario_edicion_perfil(instance=request.user, initial={"avatar": datos_extra.avatar})
+    formulario = formulario_edicion_perfil(instance=request.user, initial={"avatar": datos_extra.avatar, "fecha_nacimiento": datos_extra.fecha_nacimiento})
     
     if request.method == "POST":
         formulario = formulario_edicion_perfil(request.POST, request.FILES, instance=request.user)
         if formulario.is_valid():
             
             new_avatar = formulario.cleaned_data.get("avatar")
+            new_nacimiento = formulario.cleaned_data.get("fecha_nacimiento")
  
             datos_extra.avatar = new_avatar if new_avatar else datos_extra.avatar
+            datos_extra.fecha_nacimiento = new_nacimiento if new_nacimiento else datos_extra.fecha_nacimiento
             datos_extra.save()
             formulario.save()
               
