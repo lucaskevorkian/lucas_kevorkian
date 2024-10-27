@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    Mi perfil
+{% endblock  %}
+
+
+
+{% block h1 %}
+<h1 class="mx-auto my-0 text-uppercase">Perfil de: {{request.user.username}}</h1>
+<a class="btn btn-primary" href={% url "usuarios:editar_perfil" %}>Editar perfil</a>
+ 
+{% endblock  %}
+
+{% block main %}    
+<ul>
+    <li>Email: {{ user.email }}</li>
+    <li>Nombre: {{ user.first_name }}</li>
+    <li>Apellido: {{ user.last_name }}</li>
+    <li>Fecha de nacimiento: {{ user.datosextra.fecha_nacimiento }}</li> 
+    <li>Avatar: 
+        {% if user.datosextra.avatar %}
+            <img src="{{ user.datosextra.avatar.url }}" alt="Avatar" height="200px">
+        {% else %}
+            <p>Todavía no hay fotos</p>
+        {% endif %}
+    </li>
+</ul>
+{% endblock %}
+ 

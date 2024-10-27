@@ -12,7 +12,19 @@
 
 
 {% block main %}
- 
+<form action="{% url 'buscar_avion' %}" method="GET">
+    <label for="modelo">Modelo:</label>
+    <input type="text" name="modelo" placeholder="Modelo del avión">
+    
+    <label for="año">Año:</label>
+    <input type="number" name="año" placeholder="Año del avión">
+    
+    <label for="altitud">Altitud:</label>
+    <input type="number" name="altitud" placeholder="Altitud del avión">
+    
+    <input type="submit" value="Buscar">
+</form>
+
 
 
 

@@ -7,6 +7,8 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
+from django.views.generic import ListView
 
 
 def inicio(request):
@@ -18,6 +20,8 @@ def sobre_mi(request):
  
 def buscar_auto(request):
     formulario = buscar_auto_formulario(request.GET)
+    autos = Auto.objects.none() 
+
     if formulario.is_valid():
         marca = formulario.cleaned_data.get("Marca")
         modelo = formulario.cleaned_data.get("Modelo")
@@ -36,7 +40,7 @@ def buscar_auto(request):
             filtros['precio'] = precio
         if hp is not None:  
             filtros['hp'] = hp
-        autos = Auto.objects.filter(**filtros)  # Descomponemos el diccionario en clave=valor
+        autos = Auto.objects.filter(**filtros)
     return render(request, "buscar_auto.html", {"autos": autos, "form": formulario})
 
 
@@ -120,6 +124,20 @@ class buscar_avion(ListView):
     model = Avion
     template_name = "buscar_avion.html"
     context_object_name = "aviones"
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        modelo = self.request.GET.get('modelo')
+        año = self.request.GET.get('año')
+        altitud = self.request.GET.get('altitud')
+        
+        if modelo:
+            queryset = queryset.filter(modelo__icontains=modelo)
+        if año:
+            queryset = queryset.filter(año=año)
+        if altitud:
+            queryset = queryset.filter(altitud=altitud)
+
+        return queryset
     
 class ver_avion(DetailView):
     model = Avion

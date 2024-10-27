@@ -65,6 +65,13 @@ def editar_perfil(request):
             return redirect("inicio")
     return render(request, "usuarios/editar_perfil.html", {"form": formulario})
 
+
+@login_required
+def ver_perfil(request):
+    formulario = formulario_edicion_perfil(request.POST, request.FILES, instance=request.user)
+     
+    return render(request, "usuarios/ver_perfil.html", {"form": formulario})
+
 class cambiar_password(LoginRequiredMixin, PasswordChangeView):
     template_name = "usuarios/cambiar_password.html"
     success_url = reverse_lazy("usuarios:editar_perfil")

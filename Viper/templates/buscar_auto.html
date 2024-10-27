@@ -1,23 +1,32 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-    Buscar
+    Buscar Autos
 {% endblock  %}
 
-
 {% block h1 %}
-    <h1 class="mx-auto my-0 text-uppercase">Autos</h1>
-    <h1></h1>
+    <h1 class="mx-auto my-0 text-uppercase">Buscar Autos</h1>
     <a class="btn btn-primary" href="crear_auto">Crear auto</a>
 {% endblock  %}
 
-
-
-
 {% block main %}
 <form action="{% url 'buscar_auto' %}" method="GET">
-    {{ form }}
-    <input type="submit">
+    <label for="marca">Marca:</label>
+    <input type="text" name="Marca" placeholder="Marca del auto" value="{{ form.Marca.value|default_if_none:'' }}">
+    
+    <label for="modelo">Modelo:</label>
+    <input type="text" name="Modelo" placeholder="Modelo del auto" value="{{ form.Modelo.value|default_if_none:'' }}">
+    
+    <label for="año">Año:</label>
+    <input type="number" name="Año" placeholder="Año del auto" value="{{ form.Año.value|default_if_none:'' }}">
+    
+    <label for="precio">Precio:</label>
+    <input type="number" name="Precio" placeholder="Precio del auto" value="{{ form.Precio.value|default_if_none:'' }}">
+    
+    <label for="hp">Caballos de fuerza:</label>
+    <input type="number" name="Hp" placeholder="Hp" value="{{ form.Hp.value|default_if_none:'' }}">
+    
+    <input type="submit" value="Buscar">
 </form>
 
 {% if autos %}
