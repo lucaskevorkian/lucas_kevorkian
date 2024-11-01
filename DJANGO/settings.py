@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "Viper",
     "usuarios",
+    "chat",
+    'channels',
+
 ]
 
 MIDDLEWARE = [
@@ -129,3 +132,15 @@ LOGIN_URL = "/usuarios/login"  #sirve para cuandi pongo una restriccion de logge
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+ASGI_APPLICATION = 'chat.asgi.application'
+
+# Configuración de Redis como capa de comunicación para WebSockets
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}

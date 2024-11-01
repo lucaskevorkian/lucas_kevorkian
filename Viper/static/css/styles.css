@@ -11237,3 +11237,7 @@ body {
   border-radius: 50%; /* Esto crea el efecto de círculo */
   object-fit: cover; /* Asegura que la imagen se ajuste bien dentro del círculo */
 }
+.texto-blanco {
+  color: white;
+  font-family: Georgia, serif;
+}

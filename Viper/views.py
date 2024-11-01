@@ -69,7 +69,7 @@ def borrar_auto(request, id):
     auto = Auto.objects.get(id=id)
     auto.delete()
     return redirect("buscar_auto")
-
+@login_required
 def editar_auto(request, id):
     auto = get_object_or_404(Auto, id=id)  # Pasa el modelo Auto como primer argumento
     

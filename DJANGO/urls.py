@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('Viper/', include('Viper.urls')),  # Incluye el urls.py de viper
     path('usuarios/', include('usuarios.urls')), 
+    path('chat/', include('chat.urls')),   
+
 ]
 
 # Servir archivos de medios en desarrollo

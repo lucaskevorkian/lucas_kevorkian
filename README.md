@@ -1,1 +1,1 @@
-Lucas Kevorkian
+Este proyecto permite al usuario crear y gestionar autos y aviones. La aplicación incluye funcionalidades de autenticación, manejo de imágenes y administración de datos de autos y aviones. Una vez loggeado, el usuario puede crear, editar y eliminar los modelos y comunicarse con el resto de usuarios por el chat.

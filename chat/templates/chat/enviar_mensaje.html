@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    mensajes
+{% endblock  %}
+
+
+
+{% block h1 %}
+<h1 class="mx-auto my-0 text-uppercase">enviar mensajes</h1>
+{% endblock  %}
+ 
+{% block main %} 
+<h1>Enviar Mensaje</h1>
+<form method="POST" action="{% url 'chat:enviar_mensaje' %}">  <!-- Especifica la URL aquí -->
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+</form>
+{% endblock %}

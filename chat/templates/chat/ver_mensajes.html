@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+      mensajes
+{% endblock  %}
+
+
+
+{% block h1 %}
+<h1 class="mx-auto my-0 text-uppercase">ver mensajes</h1>
+{% endblock  %}
+ 
+{% block main %}
+<h1>Mensajes Recibidos</h1>
+<ul>
+    {% for mensaje in mensajes %}
+    <li>
+        <strong>De:</strong> {{ mensaje.remitente }} <br>
+        <strong>Mensaje:</strong> {{ mensaje.contenido }} <br>
+        <strong>Fecha:</strong> {{ mensaje.fecha_creacion }}
+    </li>
+    {% empty %}
+    <li>No tienes mensajes.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
